@@ -44,7 +44,19 @@ def register_class(request):
             )
             
             return redirect('dance_styles:payment', registration_id=registration.id)
-    
+print("=" * 50)
+print("Dance Style ID:", dance_style.id)
+print("Dance Style Name:", dance_style.name)
+print("Class Slot Count:", dance_style.class_slots.count())
+
+for slot in dance_style.class_slots.all():
+    print(
+        f"Slot: {slot.day} | "
+        f"{slot.start_time.strftime('%I:%M %p')} - "
+        f"{slot.end_time.strftime('%I:%M %p')}"
+    )
+
+print("=" * 50)
     return render(request, 'dance_styles/register.html', {
         'dance_style': dance_style,
         'user': request.user
