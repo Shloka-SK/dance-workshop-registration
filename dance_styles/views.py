@@ -22,41 +22,34 @@ def register_class(request):
     dance_style_id = request.GET.get('dance_style') or request.POST.get('dance_style')
     if not dance_style_id:
         return redirect('dance_styles:home')
-    
+
     dance_style = get_object_or_404(DanceStyle, id=dance_style_id)
-    
+
     if request.method == 'POST':
         class_slot_id = request.POST.get('class_slot')
         name = request.POST.get('name')
-        
+
         if class_slot_id and name:
             class_slot = get_object_or_404(ClassSlot, id=class_slot_id)
-            
+
             # Update user's name
             request.user.first_name = name
             request.user.save()
-            
+
             # Create registration
             registration = Registration.objects.create(
                 user=request.user,
                 dance_style=dance_style,
                 class_slot=class_slot
             )
-            
+
             return redirect('dance_styles:payment', registration_id=registration.id)
-print("=" * 50)
-print("Dance Style ID:", dance_style.id)
-print("Dance Style Name:", dance_style.name)
-print("Class Slot Count:", dance_style.class_slots.count())
 
-for slot in dance_style.class_slots.all():
-    print(
-        f"Slot: {slot.day} | "
-        f"{slot.start_time.strftime('%I:%M %p')} - "
-        f"{slot.end_time.strftime('%I:%M %p')}"
-    )
+    print("=" * 50)
+    print("Dance Style:", dance_style.name)
+    print("Slots:", dance_style.class_slots.count())
+    print("=" * 50)
 
-print("=" * 50)
     return render(request, 'dance_styles/register.html', {
         'dance_style': dance_style,
         'user': request.user
