@@ -15,35 +15,44 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+# ============================================================
 # SECURITY
+# ============================================================
 
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = os.getenv(
+    'SECRET_KEY',
+    'django-insecure-development-key-change-in-production'
+)
 
-DEBUG = os.getenv('DEBUG', 'False') == 'True'
+DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
 
 ALLOWED_HOSTS = [
     host.strip()
     for host in os.getenv(
         'ALLOWED_HOSTS',
-        '127.0.0.1,localhost'
+        '127.0.0.1,localhost,dance-workshop-registration.onrender.com'
     ).split(',')
     if host.strip()
 ]
 
 
+# ============================================================
 # CSRF TRUSTED ORIGINS
+# ============================================================
 
 CSRF_TRUSTED_ORIGINS = [
     origin.strip()
     for origin in os.getenv(
         'CSRF_TRUSTED_ORIGINS',
-        'http://127.0.0.1:8000,http://localhost:8000'
+        'http://127.0.0.1:8000,http://localhost:8000,https://dance-workshop-registration.onrender.com'
     ).split(',')
     if origin.strip()
 ]
 
 
+# ============================================================
 # APPLICATION DEFINITION
+# ============================================================
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -52,13 +61,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'channels',
+
     'dance_styles',
     'chatbot',
 ]
 
 
+# ============================================================
 # MIDDLEWARE
+# ============================================================
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -71,12 +84,16 @@ MIDDLEWARE = [
 ]
 
 
+# ============================================================
 # URL CONFIGURATION
+# ============================================================
 
 ROOT_URLCONF = 'dance_studio.urls'
 
 
+# ============================================================
 # TEMPLATES
+# ============================================================
 
 TEMPLATES = [
     {
@@ -94,7 +111,9 @@ TEMPLATES = [
 ]
 
 
+# ============================================================
 # ASGI / CHANNELS
+# ============================================================
 
 ASGI_APPLICATION = 'dance_studio.asgi.application'
 
@@ -105,12 +124,16 @@ CHANNEL_LAYERS = {
 }
 
 
+# ============================================================
 # WSGI
+# ============================================================
 
 WSGI_APPLICATION = 'dance_studio.wsgi.application'
 
 
+# ============================================================
 # DATABASE
+# ============================================================
 
 DATABASES = {
     'default': {
@@ -120,7 +143,9 @@ DATABASES = {
 }
 
 
+# ============================================================
 # PASSWORD VALIDATION
+# ============================================================
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -138,7 +163,9 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+# ============================================================
 # INTERNATIONALIZATION
+# ============================================================
 
 LANGUAGE_CODE = 'en-us'
 
@@ -149,18 +176,24 @@ USE_I18N = True
 USE_TZ = True
 
 
+# ============================================================
 # STATIC FILES
+# ============================================================
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 
+# ============================================================
 # MEDIA FILES
+# ============================================================
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 
+# ============================================================
 # DEFAULT PRIMARY KEY
+# ============================================================
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
