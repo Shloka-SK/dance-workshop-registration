@@ -8,21 +8,16 @@ from pathlib import Path
 from dotenv import load_dotenv
 import os
 
-# Load environment variables
 load_dotenv()
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# ============================================================
+# =========================
 # SECURITY
-# ============================================================
+# =========================
 
-SECRET_KEY = os.getenv(
-    'SECRET_KEY',
-    'django-insecure-development-key-change-in-production'
-)
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
 
@@ -36,9 +31,9 @@ ALLOWED_HOSTS = [
 ]
 
 
-# ============================================================
-# CSRF TRUSTED ORIGINS
-# ============================================================
+# =========================
+# CSRF
+# =========================
 
 CSRF_TRUSTED_ORIGINS = [
     origin.strip()
@@ -50,9 +45,9 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 
-# ============================================================
-# APPLICATION DEFINITION
-# ============================================================
+# =========================
+# APPLICATIONS
+# =========================
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -69,9 +64,9 @@ INSTALLED_APPS = [
 ]
 
 
-# ============================================================
+# =========================
 # MIDDLEWARE
-# ============================================================
+# =========================
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -84,16 +79,16 @@ MIDDLEWARE = [
 ]
 
 
-# ============================================================
+# =========================
 # URL CONFIGURATION
-# ============================================================
+# =========================
 
 ROOT_URLCONF = 'dance_studio.urls'
 
 
-# ============================================================
+# =========================
 # TEMPLATES
-# ============================================================
+# =========================
 
 TEMPLATES = [
     {
@@ -111,9 +106,9 @@ TEMPLATES = [
 ]
 
 
-# ============================================================
+# =========================
 # ASGI / CHANNELS
-# ============================================================
+# =========================
 
 ASGI_APPLICATION = 'dance_studio.asgi.application'
 
@@ -124,16 +119,16 @@ CHANNEL_LAYERS = {
 }
 
 
-# ============================================================
+# =========================
 # WSGI
-# ============================================================
+# =========================
 
 WSGI_APPLICATION = 'dance_studio.wsgi.application'
 
 
-# ============================================================
+# =========================
 # DATABASE
-# ============================================================
+# =========================
 
 DATABASES = {
     'default': {
@@ -143,57 +138,63 @@ DATABASES = {
 }
 
 
-# ============================================================
+# =========================
 # PASSWORD VALIDATION
-# ============================================================
+# =========================
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.MinimumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
 
 
-# ============================================================
+# =========================
 # INTERNATIONALIZATION
-# ============================================================
+# =========================
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
 USE_TZ = True
 
 
-# ============================================================
+# =========================
 # STATIC FILES
-# ============================================================
+# =========================
 
 STATIC_URL = '/static/'
+
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 
-# ============================================================
+# =========================
 # MEDIA FILES
-# ============================================================
+# =========================
 
 MEDIA_URL = '/media/'
+
 MEDIA_ROOT = BASE_DIR / 'media'
 
 
-# ============================================================
+# =========================
 # DEFAULT PRIMARY KEY
-# ============================================================
+# =========================
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
